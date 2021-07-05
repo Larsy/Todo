@@ -113,7 +113,7 @@ namespace TodoIt.Tests
             Assert.Equal("Andra uppgiften", second.Description);
         }
         [Fact]
-        public void SequencerTest()
+        public void PersonSequencerTest()
         {
             //Arrange
             int startingPersonId = Data.PersonSequencer.PersonId;
@@ -125,6 +125,20 @@ namespace TodoIt.Tests
 
             //Assert
             Assert.Equal(expectedEndingId, Data.PersonSequencer.PersonId);
+        }
+        [Fact]
+        public void TodoSequencerTest()
+        {
+            //Arrange
+            int startingTodoId = Data.TodoSequencer.TodoId;
+            int expectedEndingId = startingTodoId + 2;
+
+            //Act
+            TodoSequencer.nextTodoId();
+            TodoSequencer.nextTodoId();
+
+            //Assert
+            Assert.Equal(expectedEndingId, Data.TodoSequencer.TodoId);
         }
     }
 }
