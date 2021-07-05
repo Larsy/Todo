@@ -1,10 +1,11 @@
 using System;
 using Xunit;
 using TodoIt.Model;
+using TodoIt.Data;
 
 namespace TodoIt.Tests
 {
-    public class TodoTests
+    public class TodoItTests
     {
         [Fact]
         public void PersonTest1()
@@ -110,6 +111,20 @@ namespace TodoIt.Tests
             //Assert
             Assert.InRange(second.TodoId, 0, 1);
             Assert.Equal("Andra uppgiften", second.Description);
+        }
+        [Fact]
+        public void SequencerTest()
+        {
+            //Arrange
+            int startingPersonId = Data.PersonSequencer.PersonId;
+            int expectedEndingId = startingPersonId + 2;
+
+            //Act
+            PersonSequencer.nextPersonId();
+            PersonSequencer.nextPersonId();
+
+            //Assert
+            Assert.Equal(expectedEndingId, Data.PersonSequencer.PersonId);
         }
     }
 }
