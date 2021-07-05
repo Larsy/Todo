@@ -23,9 +23,9 @@ namespace TodoIt.Data
         public static Person AddPerson(string firstName, string middleName, string lastName, int age, int gender, bool vaccinated)
         {
             Person personToBeAdded = new Person(firstName, middleName, lastName, age, gender, vaccinated);
-            Array.Resize<Person>(ref Person, Size() + 1);
-            Person[Person.Length - 1] = personToBeAdded;
-            return Person[Person.Length - 1];
+            Array.Resize(ref Person, Size() + 1);
+            Person[^1] = personToBeAdded;
+            return Person[^1];
         }
         public static void Clear()
         {

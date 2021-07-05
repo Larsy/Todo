@@ -157,24 +157,25 @@ namespace TodoIt.Tests
             int age2 = 54;
             int gender2 = (int)Genders.Unknown;
             bool vaccinated2 = false;
+            int expectedNoOfPeople = 2;
             
             //Act
             Person person1 = People.AddPerson(firstName1, middleName1, lastName1, age1, gender1, vaccinated1);
-            Person person2 = People.AddPerson(firstName2, middleName2, lastName2, age2, gender2, vaccinated2);
+            People.AddPerson(firstName2, middleName2, lastName2, age2, gender2, vaccinated2);
             Person[] personer = People.FindAll();
 
             //Assert
             //Räkna antalet personer i People-klassen
-            Assert.Equal(2, People.Size());
+            Assert.Equal(expectedNoOfPeople, People.Size());
             //Se att metoden FindAll gör vad den ska
-            Assert.Equal(2, personer.Length);
+            Assert.Equal(expectedNoOfPeople, personer.Length);
 
-            Assert.Equal(firstName1, personer[0].FirstName);
-            Assert.Equal(middleName1, personer[0].MiddleName);
-            Assert.Equal(lastName1, personer[0].LastName);
-            Assert.Equal(age1, personer[0].Age);
-            Assert.Equal("Male", Enum.GetName(typeof(Genders), personer[0].Gender));
-            Assert.Equal(vaccinated1, personer[0].Vaccinated);
+            Assert.Equal(firstName1, person1.FirstName);
+            Assert.Equal(middleName1, person1.MiddleName);
+            Assert.Equal(lastName1, person1.LastName);
+            Assert.Equal(age1, person1.Age);
+            Assert.Equal("Male", Enum.GetName(typeof(Genders), person1.Gender));
+            Assert.Equal(vaccinated1, person1.Vaccinated);
 
             Assert.Equal(firstName2, personer[1].FirstName);
             Assert.Equal(middleName2, personer[1].MiddleName);
@@ -182,6 +183,35 @@ namespace TodoIt.Tests
             Assert.Equal(age2, personer[1].Age);
             Assert.Equal("Unknown", Enum.GetName(typeof(Genders), personer[1].Gender));
             Assert.Equal(vaccinated2, personer[1].Vaccinated);
+        }
+        [Fact]
+        public void TodoItemsTest()
+        {
+            //Arrange
+            string item1Description = "Ett första steg";
+            string item2Description = "Ett andra steg";
+            string item3Description = "Målgång";
+            bool done1 = true;
+            bool done2 = false;
+            bool done3 = false;
+            int expectedNoOfItems= 3;
+            //string assignee1fN = "Lars";
+            //string assignee1lN = "Karlsson";
+            //string assignee2fN = "Test";
+            //string assignee2lN = "Testsson";
+            //string assignee3fN = "Tessan";
+            //string assignee3lN = "Testsson";
+
+            //Act
+            TodoItems.AddTodoItem(item1Description, done1);
+            TodoItems.AddTodoItem(item2Description, done2);
+            TodoItems.AddTodoItem(item3Description, done3);
+            Todo[] items = TodoItems.FindAll();
+
+            //Assert
+            Assert.Equal(expectedNoOfItems, TodoItems.Size());
+            //Se att metoden FindAll gör vad den ska
+            Assert.Equal(expectedNoOfItems, items.Length);
         }
     }
 }

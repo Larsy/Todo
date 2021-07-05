@@ -1,10 +1,11 @@
 ﻿using System;
+using TodoIt.Data;
 
 namespace TodoIt.Model
 {
     public class Todo
     {
-        private static int idCounter = 0;
+        //private static int idCounter = 0;
         private readonly int todoId;
         private string description;
         private bool done;
@@ -31,8 +32,14 @@ namespace TodoIt.Model
         }
         public Todo (string description)
         {
-            todoId = idCounter++;
+            todoId = TodoSequencer.nextTodoId();
             Description = description;
+        }
+        public Todo (string description, bool done)
+        {
+            todoId = TodoSequencer.nextTodoId();
+            Description = description;
+            Done = done;
         }
     }
 }
