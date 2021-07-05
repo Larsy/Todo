@@ -1,13 +1,13 @@
 using System;
 using Xunit;
-using Todo.Model;
+using TodoIt.Model;
 
-namespace Todo.Tests
+namespace TodoIt.Tests
 {
     public class TodoTests
     {
         [Fact]
-        public void Test1()
+        public void PersonTest1()
         {
             //Arrange
             string firstName = "Lars";
@@ -16,11 +16,11 @@ namespace Todo.Tests
             Person person1 = new Person(firstName, lastName);
 
             //Assert
-            //Assert.Equal(0, person1.PersonId);
+            Assert.InRange(person1.PersonId, 0, 5);
             Assert.Equal("Lars Karlsson", person1.FullName);
         }
         [Fact]
-        public void Test2()
+        public void PersonTest2()
         {
             //Arrange
             string firstName = "Inger";
@@ -34,7 +34,7 @@ namespace Todo.Tests
             Assert.Throws<ArgumentException>(() => person2);
         }
         [Fact]
-        public void Test3()
+        public void PersonTest3()
         {
             //Arrange
             string firstName = "Tessan";
@@ -48,11 +48,11 @@ namespace Todo.Tests
             Person person3 = new Person(firstName, middleName, lastName, age, gender, vaccinated);
 
             //Assert
-            //Assert.Equal(1, person3.PersonId);
+            Assert.InRange(person3.PersonId, 0 ,5);
             Assert.Equal("Tessan Testy Testsson", person3.FullName);
         }
         [Fact]
-        public void Test4()
+        public void PersonTest4()
         {
             //Arrange
             string firstName = "";
@@ -69,7 +69,7 @@ namespace Todo.Tests
             Assert.IsType<ArgumentException>(person5);
         }
         [Fact]
-        public void Test5()
+        public void PersonTest5()
         {
             //Arrange
             string firstName = "Testor";
@@ -83,8 +83,33 @@ namespace Todo.Tests
             Person person6 = new Person(firstName, middleName, lastName, age, gender, vaccinated);
 
             //Assert
-            //Assert.Equal(3, person6.PersonId);
+            Assert.InRange(person6.PersonId, 0, 5);
             Assert.Equal("Testor Testy Testorsson", person6.FullName);
+        }
+        [Fact]
+        public void TodoTest1()
+        {
+            //Arrange
+            string description = "Första uppgiften";
+
+            //Act
+            Todo first = new Todo(description);
+
+            //Assert
+            Assert.InRange(first.TodoId, 0, 1);
+            Assert.Equal("Första uppgiften", first.Description);
+        }
+        [Fact]
+        public void TodoTest2()
+        {
+            //Arrange
+            string description = "Andra uppgiften";
+            //Act
+            Todo second = new Todo(description);
+
+            //Assert
+            Assert.InRange(second.TodoId, 0, 1);
+            Assert.Equal("Andra uppgiften", second.Description);
         }
     }
 }

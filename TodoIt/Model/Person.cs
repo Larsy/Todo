@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Todo.Model
+namespace TodoIt.Model
 {
     public enum Genders
     {

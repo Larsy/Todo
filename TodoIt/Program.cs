@@ -1,7 +1,7 @@
 ﻿using System;
-using Todo.Model;
+using TodoIt.Model;
 
-namespace Todo
+namespace TodoIt
 {
     class Program
     {
