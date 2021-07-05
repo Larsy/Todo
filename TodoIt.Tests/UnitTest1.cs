@@ -192,9 +192,10 @@ namespace TodoIt.Tests
             string item2Description = "Ett andra steg";
             string item3Description = "Målgång";
             bool done1 = true;
-            bool done2 = false;
+            bool done2 = true;
             bool done3 = false;
             int expectedNoOfItems= 3;
+            int expectedNoOfDoneItems= 2;
             //string assignee1fN = "Lars";
             //string assignee1lN = "Karlsson";
             //string assignee2fN = "Test";
@@ -207,11 +208,15 @@ namespace TodoIt.Tests
             TodoItems.AddTodoItem(item2Description, done2);
             TodoItems.AddTodoItem(item3Description, done3);
             Todo[] items = TodoItems.FindAll();
+            Todo[] doneItems = TodoItems.FindByDoneStatus(true);
 
             //Assert
             Assert.Equal(expectedNoOfItems, TodoItems.Size());
             //Se att metoden FindAll gör vad den ska
             Assert.Equal(expectedNoOfItems, items.Length);
+            Assert.Equal(expectedNoOfDoneItems, doneItems.Length);
+            Assert.Equal(item1Description, doneItems[0].Description);
+            Assert.Equal(item2Description, doneItems[1].Description);
         }
     }
 }

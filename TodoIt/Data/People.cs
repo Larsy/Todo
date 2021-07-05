@@ -16,7 +16,7 @@ namespace TodoIt.Data
         {
             return Person;
         }
-        public Person FindById(int personId)
+        public static Person FindById(int personId)
         {
             return Person[personId];
         }

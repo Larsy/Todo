@@ -15,7 +15,23 @@ namespace TodoIt.Data
         {
             return Todo;
         }
-        public Todo FindById(int todoId)
+        public static Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            return Array.FindAll(Todo, x => x.Done == doneStatus);
+        }
+        public static Todo[] FindByAssignee(int personId)
+        {
+            return Array.FindAll(Todo, x => x.Assignee.PersonId == personId);
+        }
+        public static Todo[] FindByAssignee(Person assignee)
+        {
+            return Array.FindAll(Todo, x => x.Assignee == assignee);
+        }
+        public static Todo[] FindUnassignedTodoItems()
+        {
+            return Array.FindAll(Todo, x => x.Assignee is null);
+        }
+        public static Todo FindById(int todoId)
         {
             return Todo[todoId];
         }
