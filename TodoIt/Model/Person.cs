@@ -21,8 +21,10 @@ namespace TodoIt.Model
         private string middleName = "";
         private string lastName = "";
         private bool vaccinated = false;
-        //Valt att spara gender som int, som får indexvärdet från enumen Genders. Detta gör det lätt att språkanpassa. Bara att initera Genders med members på det språk som önskas.
-        private int gender = 0;
+        //Valt att spara gender som int, som får indexvärdet från enumen Genders.
+        //Detta gör det t ex lätt att språkanpassa. Bara att initera Genders med members på det språk som önskas.
+        //Standardvärde 0, vilket är första medlemmen i Genders, vilken representerar okänt
+        private int genderId = 0;
 
         //public static int Counter
         //{
@@ -34,10 +36,10 @@ namespace TodoIt.Model
             get { return personId; }
         }
 
-        public int Gender
+        public object Gender
         {
-            get { return gender; }
-            private set { gender = value; }
+            get { return Enum.GetName(typeof(Genders), genderId); }
+            private set { genderId = (int)value; }
         }
 
         public string FirstName
@@ -45,12 +47,10 @@ namespace TodoIt.Model
             get { return firstName; }
             private set
             {
-                if (value is null || value == string.Empty)
+                if (!string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Förnamn får inte vara tomt!");
+                    firstName = value;
                 }
-                else
-                { firstName = value; }
             }
         }
 
@@ -65,12 +65,10 @@ namespace TodoIt.Model
             get { return lastName; }
             private set
             {
-                if (value is null || value == string.Empty)
+                if (!string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Efternamn får inte vara tomt!");
+                    lastName = value;
                 }
-                else
-                { lastName = value; }
             }
         }
 
@@ -93,19 +91,19 @@ namespace TodoIt.Model
 
         public Person(string firstName, string lastName)
         {
-            personId = PersonSequencer.nextPersonId();
             FirstName = firstName;
             LastName = lastName;
-        }
-        public Person(string firstName, string middleName, string lastName, int age, int gender, bool isVaccinated)
-        {
             personId = PersonSequencer.nextPersonId();
+        }
+        public Person(string firstName, string middleName, string lastName, int age, object gender, bool isVaccinated)
+        {
             FirstName = firstName;
             MiddleName = middleName;
             LastName = lastName;
             Age = age;
             Gender = gender;
             Vaccinated = isVaccinated;
+            personId = PersonSequencer.nextPersonId();
         }
     }
 }
