@@ -21,16 +21,15 @@ namespace TodoIt.Model
         private string middleName = "";
         private string lastName = "";
         private bool vaccinated = false;
-        //Valt att spara gender som int, som får indexvärdet från enumen Genders.
+        //Har med avsikt valt att internt spara gender som int, som får indexvärdet från enumen Genders.
         //Detta gör det t ex lätt att språkanpassa. Bara att initera Genders med members på det språk som önskas.
-        //Standardvärde 0, vilket är första medlemmen i Genders, vilken representerar okänt
         private int genderId = 0;
 
         //public static int Counter
         //{
         //    get { return idCounter; }
         //}
-        
+
         public int PersonId
         {
             get { return personId; }
@@ -38,7 +37,17 @@ namespace TodoIt.Model
 
         public object Gender
         {
-            get { return Enum.GetName(typeof(Genders), genderId); }
+            get
+            {
+                if (Enum.IsDefined(typeof(Genders), genderId))
+                {
+                    return Enum.GetName(typeof(Genders), genderId);
+                }
+                else
+                {
+                    return "<Not set>";
+                }
+            }
             private set { genderId = (int)value; }
         }
 
@@ -95,6 +104,7 @@ namespace TodoIt.Model
             LastName = lastName;
             personId = PersonSequencer.nextPersonId();
         }
+ 
         public Person(string firstName, string middleName, string lastName, int age, object gender, bool isVaccinated)
         {
             FirstName = firstName;
