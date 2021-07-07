@@ -41,5 +41,12 @@ namespace TodoIt.Model
             Description = description;
             Done = done;
         }
+        public Todo (Person assignee, string description, bool done)
+        {
+            todoId = TodoSequencer.nextTodoId();
+            Assignee = assignee;
+            Description = description;
+            Done = done;
+        }
     }
 }
