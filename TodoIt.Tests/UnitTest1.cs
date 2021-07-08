@@ -13,6 +13,7 @@ namespace TodoIt.Tests
             //Arrange
             string firstName = "Lars";
             string lastName = "Karlsson";
+
             //Act
             Person person1 = new Person(firstName, lastName);
 
@@ -29,6 +30,7 @@ namespace TodoIt.Tests
             
             //Act
             Person person2 = new Person(firstName, lastName);
+ 
             //Assert
             Assert.Equal(firstName, person2.FirstName);
         }
@@ -41,7 +43,7 @@ namespace TodoIt.Tests
             string middleName = "Testy";
             string lastName = "Testsson";
             int age = 51;
-            var gender = Genders.Female;
+            string gender = Genders.Female.ToString();
             bool vaccinated = true;
 
             //Act
@@ -49,6 +51,9 @@ namespace TodoIt.Tests
 
             //Assert
             Assert.Equal("Tessan Testy Testsson", person3.FullName);
+            Assert.Equal(51, person3.Age);
+            Assert.Equal("Female", person3.Gender);
+            Assert.True(person3.Vaccinated);
         }
 
         [Fact]
@@ -59,7 +64,7 @@ namespace TodoIt.Tests
             string middleName = "";
             string lastName = "Hutt";
             int age = 51;
-            var gender = Genders.Other;
+            string gender = Genders.Other.ToString();
             bool vaccinated = false;
 
             //Act
@@ -67,6 +72,9 @@ namespace TodoIt.Tests
 
             //Assert
             Assert.Equal(lastName, person4.LastName);
+            Assert.Equal(51, person4.Age);
+            Assert.Equal("Other", person4.Gender);
+            Assert.False(person4.Vaccinated);
         }
 
         [Fact]
@@ -77,15 +85,17 @@ namespace TodoIt.Tests
             string middleName = "Testy";
             string lastName = "Testorsson";
             int age = 52;
-            var gender = Genders.Male;
+            string gender = Genders.Male.ToString();
             bool vaccinated = true;
 
             //Act
-            
             Person person5 = new Person(firstName, middleName, lastName, age, gender, vaccinated);
 
             //Assert
             Assert.Equal("Testor Testy Testorsson", person5.FullName);
+            Assert.Equal(52, person5.Age);
+            Assert.Equal("Male", person5.Gender);
+            Assert.True(person5.Vaccinated);
         }
 
         [Fact]
@@ -168,21 +178,21 @@ namespace TodoIt.Tests
             string middleName1 = "Einar";
             string lastName1 = "Karlsson";
             int age1 = 54;
-            var gender1 = Genders.Male;
+            string gender1 = Genders.Male.ToString();
             bool vaccinated1 = true;
 
             string firstName2 = "Test";
             string middleName2 = "Testern";
             string lastName2 = "Testsson";
             int age2 = 30;
-            var gender2 = Genders.NonBinary;
+            string gender2 = Genders.NonBinary.ToString();
             bool vaccinated2 = false;
 
             string firstName3 = "Jabba";
             string middleName3 = "The";
             string lastName3 = "Hutt";
             int age3 = 300;
-            var gender3 = Genders.Unknown;
+            string gender3 = Genders.Unknown.ToString();
             bool vaccinated3 = false;
 
             int personToRemove = 1;
@@ -266,7 +276,6 @@ namespace TodoIt.Tests
             int actualNoOfItemsAfterClear;
 
             //Act
-
             TodoSequencer.reset();
 
             Person assignee1 = new Person(assignee1_fName, assignee1_lName);
