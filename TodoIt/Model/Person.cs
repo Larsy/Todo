@@ -35,7 +35,7 @@ namespace TodoIt.Model
             get { return personId; }
         }
 
-        public object Gender
+        public string Gender
         {
             get
             {
@@ -48,7 +48,17 @@ namespace TodoIt.Model
                     return "<Not set>";
                 }
             }
-            private set { genderId = (int)value; }
+            private set
+            {
+                if (Enum.TryParse(typeof(Genders), value, true, out object result))
+                {
+                    genderId = (int)result;
+                }
+                else
+                {
+                    genderId = 0;
+                }
+            }
         }
 
         public string FirstName
@@ -105,7 +115,7 @@ namespace TodoIt.Model
             personId = PersonSequencer.nextPersonId();
         }
  
-        public Person(string firstName, string middleName, string lastName, int age, object gender, bool isVaccinated)
+        public Person(string firstName, string middleName, string lastName, int age, string gender, bool isVaccinated)
         {
             FirstName = firstName;
             MiddleName = middleName;
