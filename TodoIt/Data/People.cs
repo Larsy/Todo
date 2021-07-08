@@ -2,7 +2,6 @@
 using System.Linq;
 using TodoIt.Model;
 
-
 namespace TodoIt.Data
 {
     public class People
@@ -26,7 +25,7 @@ namespace TodoIt.Data
             return Person[indexToFind];
         }
 
-        public static Person AddPerson(string firstName, string middleName, string lastName, int age, object gender, bool vaccinated)
+        public static Person AddPerson(string firstName, string middleName, string lastName, int age, string gender, bool vaccinated)
         {
             Person personToBeAdded = new Person(firstName, middleName, lastName, age, gender, vaccinated);
             Array.Resize(ref Person, Size() + 1);
